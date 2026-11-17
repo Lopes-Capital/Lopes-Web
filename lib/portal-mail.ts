@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 /**
- * Shared mailer for the two intake portals (/api/apply, /api/submit).
+ * Mailer behind the Introductions form (/api/introductions).
  *
  * Env:
  *  - RESEND_API_KEY   — required in production. Without it, dev builds log the

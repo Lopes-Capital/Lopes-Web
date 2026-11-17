@@ -1,48 +1,77 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import { Libre_Caslon_Display, Libre_Caslon_Text } from "next/font/google";
+import { SiteNav } from "@/components/site-nav";
 import "./globals.css";
-import { PageCurtain } from "@/components/page-curtain";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  axes: ["opsz"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
+const display = Libre_Caslon_Display({
+  variable: "--font-display",
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-grotesk",
+const text = Libre_Caslon_Text({
+  variable: "--font-text",
+  weight: "400",
+  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Lopes Capital — Operating since 2017",
+  title: {
+    default: "Lopes Capital | Richardson family office",
+    template: "%s | Lopes Capital",
+  },
   description:
-    "Lopes Capital is a multi-family office in Scottsdale, Arizona, deploying principal capital across capital markets, real estate, education, healthcare, and media & consumer.",
+    "Lopes Capital is the private family office of the Richardson family, led by Brent and Chris Richardson, the operators behind the 2004 rescue of Grand Canyon University.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} ${spaceGrotesk.variable}`}
-    >
+    <html lang="en" className={`${display.variable} ${text.variable}`}>
       <body>
-        {children}
-        <PageCurtain />
+        <a className="skip" href="#main">
+          Skip to content
+        </a>
+
+        <header className="wrap mast">
+          <Link className="brand" href="/">
+            <Image
+              src="/brand/lopes-capital-logo.png"
+              alt="Lopes Capital"
+              width={94}
+              height={132}
+              loading="eager"
+            />
+          </Link>
+          <SiteNav />
+        </header>
+
+        <main id="main">{children}</main>
+
+        <footer className="dark">
+          <div className="wrap">
+            <Image
+              className="seal"
+              src="/brand/lopes-capital-seal.png"
+              alt="Lopes Capital"
+              width={132}
+              height={132}
+            />
+            <span className="place caps">Scottsdale, Arizona</span>
+            <p>
+              Lopes Capital is a private investment office. It invests the Richardson
+              family&apos;s capital and also sponsors investment vehicles. Nothing on this
+              site is an offer to sell securities or a solicitation of investment; any
+              offering is made only through its own formal documents. Figures are drawn
+              from public filings and the principals&apos; own account, as marked above.
+            </p>
+            <p>&copy; 2026 Lopes Capital</p>
+          </div>
+        </footer>
       </body>
     </html>
   );

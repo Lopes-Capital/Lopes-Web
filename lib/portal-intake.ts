@@ -5,9 +5,9 @@ import {
 } from "@/lib/portal-mail";
 
 /**
- * Shared POST handler for the intake portals. Each route declares its expected
- * fields; this parses the multipart body, validates, and emails the result
- * (attachment included) via Resend.
+ * POST handler for form intake. A route declares its expected fields (and,
+ * optionally, one file); this parses the multipart body, validates, and emails
+ * the result via Resend.
  */
 
 export type IntakeFieldSpec = {
